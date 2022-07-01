@@ -1,6 +1,7 @@
 import { API_URL, RES_PER_PAGE, KEY } from './config.js';
 // import { getJSON, sendJSON } from './helpers.js';
 import { AJAX } from './helpers.js';
+import { async } from 'regenerator-runtime';
 
 export const state = {
   recipe: {},
@@ -50,16 +51,19 @@ export const loadSearchResults = async function (query) {
     state.search.query = query;
 
     const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
+    console.log(data);
 
-    state.search.results = data.data.recipes.map(recipe => {
+    state.search.results = data.data.recipes.map(rec => {
       return {
-        id: recipe.id,
-        image: recipe.image_url,
-        publisher: recipe.publisher,
-        title: recipe.title,
-        ...(recipe.key && { key: recipe.key }),
+        id: rec.id,
+        image: rec.image_url,
+        publisher: rec.publisher,
+        title: rec.title,
+        ...(rec.key && { key: rec.key }),
       };
     });
+    console.log(state.search);
+    state.search.page = 1; // Added for deploy debug
   } catch (err) {
     console.error(`${err} 💥`);
     throw err;
