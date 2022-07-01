@@ -51,7 +51,6 @@ export const loadSearchResults = async function (query) {
     state.search.query = query;
 
     const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
-    console.log(data);
 
     state.search.results = data.data.recipes.map(rec => {
       return {
@@ -62,8 +61,7 @@ export const loadSearchResults = async function (query) {
         ...(rec.key && { key: rec.key }),
       };
     });
-    console.log('loadSearchResults', state.search);
-    state.search.page = 1; // Added for deploy debug
+    state.search.page = 1;
   } catch (err) {
     console.error(`loadSearchResults: ${err} 💥`);
     throw err;
@@ -71,7 +69,6 @@ export const loadSearchResults = async function (query) {
 };
 
 export const getSearchResultsPage = function (page = state.search.page) {
-  console.log('getSearchResultsPage this object:', this);
   state.search.page = page;
 
   const start = state.search.resultsPerPage * (page - 1);
