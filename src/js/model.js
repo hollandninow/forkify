@@ -62,10 +62,10 @@ export const loadSearchResults = async function (query) {
         ...(rec.key && { key: rec.key }),
       };
     });
-    console.log(state.search);
+    console.log('loadSearchResults', state.search);
     state.search.page = 1; // Added for deploy debug
   } catch (err) {
-    console.error(`${err} 💥`);
+    console.error(`loadSearchResults: ${err} 💥`);
     throw err;
   }
 };
