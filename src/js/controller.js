@@ -127,6 +127,10 @@ const controlAddRecipe = async function (newRecipe) {
   } catch (err) {
     console.error(err, '💥');
     addRecipeView.renderError(err.message);
+    setTimeout(function () {
+      addRecipeView.hideWindow();
+      addRecipeView.render('bypass'); // Passing fake unused data to bypass guard clause in render.
+    }, MODAL_CLOSE_SEC * 1000);
   }
 };
 
