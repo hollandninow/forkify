@@ -63,7 +63,7 @@ export const loadSearchResults = async function (query) {
     });
     state.search.page = 1;
   } catch (err) {
-    console.error(`loadSearchResults: ${err} 💥`);
+    // console.error(`loadSearchResults: ${err} 💥`);
     throw err;
   }
 };
@@ -162,3 +162,7 @@ init();
 // 1. Shopping list feature: button on recipe to add ingredients to a list
 // 2. Weekly meal planning feature
 // 3. Get nutrition data
+
+// TODO
+// Fix reappearing upload recipe window w success message (due to toggle function)
+// Allow users to add additional recipes after the first without reloading the page (reinsert html for upload form)

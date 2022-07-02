@@ -21,8 +21,8 @@ class AddRecipeView extends View {
   }
 
   _addHandlerHideWindow() {
-    this._btnClose.addEventListener('click', this.toggleWindow.bind(this));
-    this._overlay.addEventListener('click', this.toggleWindow.bind(this));
+    this._btnClose.addEventListener('click', this.hideWindow.bind(this));
+    this._overlay.addEventListener('click', this.hideWindow.bind(this));
   }
 
   addHandlerUpload(handler) {
@@ -40,8 +40,13 @@ class AddRecipeView extends View {
     this._window.classList.toggle('hidden');
   }
 
+  hideWindow() {
+    this._overlay.classList.add('hidden');
+    this._window.classList.add('hidden');
+  }
+
   _generateMarkup() {
-    const markup = `
+    return `
       <div class="upload__column">
         <h3 class="upload__heading">Recipe data</h3>
         <label>Title</label>

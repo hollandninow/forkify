@@ -52,9 +52,9 @@ const controlSearchResults = async function () {
 
     // 3. Render results
     resultsView.render(model.getSearchResultsPage());
+    // console.log('Model state after search:', model.state);
 
     // 4. Render initial pagination buttons
-    console.log('Model state after search:', model.state);
     paginationView.render(model.state.search);
   } catch (err) {
     console.error(`${err} 💥`);
@@ -103,7 +103,7 @@ const controlAddRecipe = async function (newRecipe) {
 
     // Upload the new recipe data
     await model.uploadRecipe(newRecipe);
-    console.log(model.state.recipe);
+    // console.log(model.state.recipe);
 
     // Render recipe
     recipeView.render(model.state.recipe);
@@ -119,17 +119,20 @@ const controlAddRecipe = async function (newRecipe) {
 
     // Close form window
     setTimeout(function () {
-      addRecipeView.toggleWindow();
+      addRecipeView.hideWindow();
+      addRecipeView.render('bypass'); // Passing fake unused data to bypass guard clause in render.
     }, MODAL_CLOSE_SEC * 1000);
+
+    // Restore HTML markup
   } catch (err) {
     console.error(err, '💥');
     addRecipeView.renderError(err.message);
   }
 };
 
-const clearBookmarks = function () {
-  localStorage.clear('bookmarks');
-};
+// const clearBookmarks = function () {
+//   localStorage.clear('bookmarks');
+// };
 // clearBookmarks();
 
 const init = function () {
